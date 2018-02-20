@@ -18,7 +18,8 @@ We're going to be writing a shell script.  First, though... let's figure out wha
 What command did you use, and what was its output?
 ----------
 
-
+date
+Tue Feb 20 16:44:35 EST 2018
 
 ==========
 2. Print out a calendar for this month.
@@ -26,6 +27,15 @@ What command did you use, and what was its output?
 What command did you use, and what was its output?
 ----------
 
+cal
+
+   February 2018
+Su Mo Tu We Th Fr Sa
+             1  2  3
+ 4  5  6  7  8  9 10
+11 12 13 14 15 16 17
+18 19 20 21 22 23 24
+25 26 27 28
 
 
 ==========
@@ -34,7 +44,7 @@ What command did you use, and what was its output?
 What commands did you use to do this?
 ----------
 
-
+cd ~
 
 ==========
 4. Create an empty file called copy_to_backup.sh.  Verify that the file exists.
@@ -42,7 +52,32 @@ What commands did you use to do this?
 What commands did you use to do this?
 ----------
 
-
+touch copy_to_backup.sh
+ls
+drwxr-x---   2 student  staff      68 Aug 22  2016 Adlm
+drwxr-xr-x   3 student  staff     102 Aug 22  2016 Adobe
+drwxr-xr-x   4 student  staff     136 Aug 22  2016 Applications
+drwx------  16 student  staff     544 Feb 13 20:34 Desktop
+drwx------+ 29 student  staff     986 Feb 20 10:17 Documents
+drwx------+ 48 student  staff    1632 Feb 20 10:18 Downloads
+drwx------@ 62 student  staff    2108 Feb  6 20:34 Library
+drwxr-xr-x   2 student  staff      68 Aug 22  2016 MPLABXProjects
+drwx------   8 student  staff     272 Jan 17  2017 Movies
+drwx------   8 student  staff     272 Aug 22  2016 Music
+drwxr-xr-x   5 student  staff     170 Dec  8 12:02 New Unity Project
+drwx------   6 student  staff     204 Aug  9  2017 Pictures
+drwxr-xr-x   5 student  staff     170 Aug 22  2016 Public
+drwxr-xr-x@  3 student  staff     102 Aug  9  2017 QLData
+drwxr-xr-x   5 student  staff     170 Aug 22  2016 Things
+-rw-r--r--   1 student  staff       0 Feb 20 16:46 copy_to_backup.sh
+-rw-r--r--   1 student  staff   11368 Feb  5 16:06 google.html
+-rw-r--r--   1 student  staff     824 Jan 17  2017 ipe.properties
+drwxr-xr-x   3 student  staff     102 Aug 22  2016 isus
+drwxr-xr-x   8 student  staff     272 Feb 20 15:56 mtec1003-lab-03
+-rw-r--r--   1 student  staff  920373 Feb 20 15:11 mtec1003-lab-03.tar.gz
+-rw-r--r--   1 student  staff  305864 Feb 20 16:13 pg1232.txt
+-rw-r--r--   1 student  staff       0 Feb 15 18:12 pymel.log
+drwxr-xr-x   2 student  staff      68 Aug 22  2016 xgen
 
 ==========
 5. What are the permissions on your copy_to_backup.sh.
@@ -50,7 +85,8 @@ What commands did you use to do this?
 What command did you use to find the permissions?
 ----------
 
-
+ls -l copy_to_backup.sh
+-rw-r--r--
 
 ==========
 6. Change the permissions so that this file is executable by the user.  Verify the new permissions.
@@ -58,7 +94,10 @@ What command did you use to find the permissions?
 What commands did you use to do this?  What was the output?
 ----------
 
-
+chmod u+x copy_to_backup.sh
+No output.
+ls -l copy_to_backup.sh
+-rwxr--r--  1 student  staff  0 Feb 20 16:46 copy_to_backup.sh
 
 ==========
 7. Try executing the file!
@@ -68,7 +107,8 @@ $ ./copy_to_backup.sh
 What command did you use to try to execute the file?  What happens?
 ----------
 
-
+bash copy_to_backup.sh
+Nothing happened.
 
 ==========
 8. Open the file with nano
@@ -76,7 +116,7 @@ What command did you use to try to execute the file?  What happens?
 What command did you use to do this?
 ----------
 
-
+nano copy_to_backup.sh
 
 ==========
 9. In your file, write the commands to do the following
@@ -90,13 +130,36 @@ Don't forget the first line of your shell script! It should begin with #!/bin/ba
 Write out the code in your file below...
 ----------
 
-
+#!/bin/bash
+mkdir backup
+cp *.txt backup
+echo "I'm backing up"
 
 ==========
 10. Create a directory in your home called test
 ----------
 
+Here's the full script for all the questions:
 
+#!/bin/bash
+mkdir backup
+echo "Made backup"
+cp *.txt backup
+echo "Copied *txt files to backup"
+echo "I'm backing up"
+mkdir ~/test
+echo "Made ~/test"
+cd ~/test
+echo "Changed to ~/test"
+touch 1.txt
+echo "1 created."
+touch 2.txt
+echo "2 created."
+mv ~/copy_to_backup.sh ~/test
+echo "Moved shell into ~/test"
+mkdir backup
+ls -l
+echo Finished.
 
 ==========
 11. Go into that directory and create two empty files... 1.txt and 2.txt
@@ -104,7 +167,10 @@ Write out the code in your file below...
 What commands did you use to do this?
 ----------
 
-
+touch 1.txt
+echo "1 created."
+touch 2.txt
+echo "2 created."
 
 ==========
 12. Move the script that you created into this directory.
@@ -112,7 +178,8 @@ What commands did you use to do this?
 What commands did you use to do this?
 ----------
 
-
+mv ~/copy_to_backup.sh ~/test
+echo "Moved shell into ~/test"
 
 ==========
 13. Run your script.
@@ -120,10 +187,18 @@ What commands did you use to do this?
 What commands did you use to do this?
 ----------
 
-
+bash copy_to_backup.sh
 
 ==========
 14. Verify that a backup folder was created in your test directory... with copies of the files present.
 
 What commands did you use to do this?  Show the output.
 ----------
+
+ls -l
+
+total 8
+-rw-r--r--  1 student  staff    0 Feb 20 16:57 1.txt
+-rw-r--r--  1 student  staff    0 Feb 20 16:57 2.txt
+drwxr-xr-x  2 student  staff   68 Feb 20 16:57 backup
+-rwxr--r--  1 student  staff  324 Feb 20 16:56 copy_to_backup.sh
